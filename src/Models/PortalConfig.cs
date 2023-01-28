@@ -14,6 +14,7 @@ public class PortalConfig
     /// <summary>Gets or sets the Password required for login</summary>
     public string Password { get; set; }
 
+    [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
     /// <summary>The authentication type for the portal</summary>
     public AuthenticationType Authentication { get; set; }
 
@@ -31,7 +32,5 @@ public class PortalConfig
     
     /// <summary></summary>
     public string PostLoginSelector { get; set; }
-
-    public string ExecutionStrategy { get; set; }
 
 }
