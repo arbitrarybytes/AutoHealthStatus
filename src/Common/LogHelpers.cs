@@ -1,16 +1,19 @@
 namespace AutoHealthStatus;
 
-public static class ConsoleHelpers
+public static class LogHelpers
 {
     const ConsoleColor InfoColor = ConsoleColor.Cyan;
     const ConsoleColor ErrorColor = ConsoleColor.Red;
     const ConsoleColor WarningColor = ConsoleColor.Yellow;
+    const ConsoleColor SuccessColor = ConsoleColor.Green;
 
     public static void LogAsInfo(this string message) => LogMessageInternal(message, InfoColor);
 
     public static void LogAsWarning(this string message) => LogMessageInternal(message, WarningColor);
 
     public static void LogAsError(this string message) => LogMessageInternal(message, ErrorColor);
+
+    public static void LogAsSuccess(this string message) => LogMessageInternal(message, SuccessColor);
 
     private static void LogMessageInternal(string message, ConsoleColor color)
     {
