@@ -1,13 +1,15 @@
 using AutoHealthStatus.Models;
+using Microsoft.Playwright;
 
 namespace AutoHealthStatus.HealthCheck;
 
-public class SonarQubeHealthCheckStrategy : HealthCheckStrategyBase
+public class RabbitMQHealthCheckStrategy : HealthCheckStrategyBase
 {
 
-    const string SupportedPortal = "SonarQube";
+    const string SupportedPortal = "RabbitMQ";
+    const string VirtualHost = "vhost"; //TODO: Change as needed
 
-    public SonarQubeHealthCheckStrategy(PortalConfig portalConfig) : base(portalConfig) { }
+    public RabbitMQHealthCheckStrategy(PortalConfig portalConfig) : base(portalConfig) { }
 
     public override bool CanExecute()
     {
@@ -18,8 +20,8 @@ public class SonarQubeHealthCheckStrategy : HealthCheckStrategyBase
     {
         try
         {
-            await _page.ClickAsync("button>div.overview-measures-tab>span:text('Overall Code')");
-            await _page.WaitForSelectorAsync(".overview-panel-content");
+            await _page.GetByRole(AriaRole.Combobox, new() { Name = "Virtual host" }).SelectOptionAsync(new[] { VirtualHost });
+            await _page.WaitForSelectorAsync(".updatable");
 
             //Take page screenshot
             await TakeScreenShotAsync(string.Empty, Portal);
