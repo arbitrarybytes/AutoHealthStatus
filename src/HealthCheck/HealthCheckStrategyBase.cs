@@ -6,7 +6,7 @@ namespace AutoHealthStatus.HealthCheck;
 public abstract class HealthCheckStrategyBase : IHealthCheckStrategy
 {
     const string ScreenshotsFolder = "Screenshots";
-    
+
     protected IBrowser _browser;
     protected IPage _page;
 
