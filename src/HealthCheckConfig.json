@@ -1,0 +1,55 @@
+{
+  "PortalConfigs": [
+    {
+      "Name": "SonarQube",
+      "PortalUrl": "https://sonarqube.com",
+      "Username": "",
+      "Password": "",
+      "Authentication": "Forms",
+      "LoginSelector": "#login_form",
+      "UsernameSelector": "#login",
+      "PasswordSelector": "#password",
+      "LoginButtonSelector": ".button",
+      "PostLoginSelector": ".overview"
+    },
+    {
+      "Name": "RabbitMQ",
+      "PortalUrl": "https://rmq.com",
+      "Username": "",
+      "Password": "",
+      "Authentication": "Forms",
+      "LoginSelector": null,
+      "UsernameSelector": "input[name=\u0027username\u0027]",
+      "PasswordSelector": "input[name=\u0027password\u0027]",
+      "LoginButtonSelector": "Login",
+      "PostLoginSelector": null
+    },
+    {
+      "Name": "Kafka",
+      "PortalUrl": "https://kafka.com",
+      "Username": "",
+      "Password": "",
+      "Authentication": "Basic",
+      "LoginSelector": null,
+      "UsernameSelector": null,
+      "PasswordSelector": null,
+      "LoginButtonSelector": null,
+      "PostLoginSelector": null
+    },
+    {
+      "Name": "BlackDuck",
+      "PortalUrl": "https://blackduck.com/",
+      "Username": "",
+      "Password": "",
+      "Authentication": "Forms",
+      "LoginSelector": null,
+      "UsernameSelector": "Username",
+      "PasswordSelector": "Password",
+      "LoginButtonSelector": null,
+      "PostLoginSelector": null
+    }
+  ],
+  "ExportOptions": {
+    "ScreenshotLocation": "Screenshots"
+  }
+}

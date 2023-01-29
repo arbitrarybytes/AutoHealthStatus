@@ -6,7 +6,7 @@ namespace AutoHealthStatus.HealthCheck;
 public abstract class HealthCheckStrategyBase : IHealthCheckStrategy
 {
     const string ScreenshotsFolder = "Screenshots";
-    
+
     protected IBrowser _browser;
     protected IPage _page;
 
@@ -17,21 +17,21 @@ public abstract class HealthCheckStrategyBase : IHealthCheckStrategy
         Portal = config;
     }
 
-    public virtual async Task<bool> ExecuteAsync(IBrowser browser)
+    public virtual async Task<bool> ExecuteAsync(IBrowser browser, int? preferredWidth = null, int? preferredHeight = null)
     {
         _browser = browser;
         try
         {
-            return await LoginAsync();
+            return await LoginAsync(preferredWidth, preferredHeight);
         }
         catch (Exception ex)
         {
-            $"Exception while executing health check for {Portal.Name}.\nDetails:{ex.Message}".LogAsError();
+            $"{Portal.Name} Health Check Exception - Details: {ex.Message}".LogAsError();
             return false;
         }
     }
 
-    public async Task<bool> LoginAsync()
+    public virtual async Task<bool> LoginAsync(int? viewPortWidth = null, int? viewPortHeight = null)
     {
         try
         {
@@ -41,6 +41,11 @@ public abstract class HealthCheckStrategyBase : IHealthCheckStrategy
                 options.HttpCredentials = new HttpCredentials { Password = Portal.Password, Username = Portal.Username };
 
             _page = await _browser.NewPageAsync(options);
+
+            if(viewPortWidth > 0 && viewPortHeight > 0)
+            {
+                await _page.SetViewportSizeAsync(viewPortWidth.Value, viewPortHeight.Value);
+            }
 
             await _page.GotoAsync(Portal.PortalUrl);
 
