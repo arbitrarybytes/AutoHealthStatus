@@ -1,13 +1,15 @@
 using AutoHealthStatus.Models;
+using Microsoft.Playwright;
 
 namespace AutoHealthStatus.HealthCheck;
 
-public class SonarQubeHealthCheckStrategy : HealthCheckStrategyBase
+public class BlackDuckHealthCheckStrategy : HealthCheckStrategyBase
 {
 
-    const string SupportedPortal = "SonarQube";
+    const string SupportedPortal = "BlackDuck";
+    const string AppName = "appname"; //TODO: Change as needed
 
-    public SonarQubeHealthCheckStrategy(PortalConfig portalConfig) : base(portalConfig) { }
+    public BlackDuckHealthCheckStrategy(PortalConfig portalConfig) : base(portalConfig) { }
 
     public override bool CanExecute()
     {
@@ -18,8 +20,8 @@ public class SonarQubeHealthCheckStrategy : HealthCheckStrategyBase
     {
         try
         {
-            await _page.ClickAsync("button>div.overview-measures-tab>span:text('Overall Code')");
-            await _page.WaitForSelectorAsync(".overview-panel-content");
+            await _page.GetByRole(AriaRole.Link, new() { Name = AppName }).ClickAsync();
+            await _page.WaitForSelectorAsync(".table-content-region");
 
             //Take page screenshot
             await TakeScreenShotAsync(string.Empty, Portal);

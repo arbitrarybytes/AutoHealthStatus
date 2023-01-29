@@ -26,7 +26,7 @@ public abstract class HealthCheckStrategyBase : IHealthCheckStrategy
         }
         catch (Exception ex)
         {
-            $"{Portal.Name} Health Check Exception - Details: {ex.Message}".LogAsError();
+            Portal.LogError(ex.Message, nameof(ExecuteAsync));
             return false;
         }
     }
@@ -65,7 +65,7 @@ public abstract class HealthCheckStrategyBase : IHealthCheckStrategy
         }
         catch (System.Exception ex)
         {
-            $"Exception at Login for {Portal.Name} with {Portal.Authentication}\nDetails: {ex.Message}".LogAsError();
+            Portal.LogError(ex.Message, nameof(LoginAsync));
             return false;
         }
     }
@@ -97,7 +97,7 @@ public abstract class HealthCheckStrategyBase : IHealthCheckStrategy
         }
         catch (Exception ex)
         {
-            $"Exception while taking screenshot for {Portal.Name} with {Portal.Authentication}\nDetails: {ex.Message}".LogAsError();
+            Portal.LogError(ex.Message, nameof(TakeScreenShotAsync));
             return false;
         }
     }

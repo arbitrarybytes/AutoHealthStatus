@@ -20,9 +20,10 @@ class Program
         foreach(var config in _config.PortalConfigs)
         {
             $"[{config.Name} - {config.Authentication}] - Processing started".LogAsInfo();
+            $"[{config.Name} - {config.Authentication}] - Processing completed".LogAsSuccess();
         }
 
-        $"Processing config started".LogAsSuccess();
+        $"Processing config completed".LogAsSuccess();
     }
 
     static bool LoadConfig()
