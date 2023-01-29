@@ -30,7 +30,7 @@ public class RabbitMQHealthCheckStrategy : HealthCheckStrategyBase
         }
         catch (System.Exception ex)
         {
-            $"Error performing health check for {Portal.Name}.\nDetails: {ex.Message}".LogAsError();
+            Portal.LogError(ex.Message, nameof(PerformHealthCheckAsync));
             return false;
         }
     }

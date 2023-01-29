@@ -1,3 +1,5 @@
+using AutoHealthStatus.Models;
+
 namespace AutoHealthStatus;
 
 public static class LogHelpers
@@ -21,5 +23,15 @@ public static class LogHelpers
         Console.ForegroundColor = color;
         Console.WriteLine(message);
         Console.ForegroundColor = currentColor;
+    }
+
+    public static string ToMessage(this PortalConfig config, string message)
+    {
+        return $"[{config.Name} : {config.Authentication}] - {message}";
+    }
+
+    public static void LogError(this PortalConfig config, string errorMessage, string source)
+    {
+        $"[{config.Name} : {config.Authentication}] - Exception at {source}\nDetails: {errorMessage}".LogAsError();
     }
 }
